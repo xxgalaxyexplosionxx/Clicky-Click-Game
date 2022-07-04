@@ -20,8 +20,8 @@ Function FileExists(FilePath)
 End Function
 Sub SaveGame(i,n)
     Set objFSO = createobject("Scripting.FileSystemObject")
-    Set objClickFile = objFSO.CreateTextFile("./" & "\CLICKS.txt")
-    Set objRebirthFile = objFSO.CreateTextFile("./" & "\REBIRTHS.txt")
+    Set objClickFile = objFSO.CreateTextFile("./" & "\Data\CLICKS.data")
+    Set objRebirthFile = objFSO.CreateTextFile("./" & "\Data\REBIRTHS.data")
     objClickFile.Write ""&i&"" & vbCrLf
     objClickFile.Close
     objRebirthFile.Write ""&n&"" & vbCrLf
@@ -30,8 +30,8 @@ End Sub
 savefilequestionstart = MsgBox("New Game?", vbYesNo+vbQuestion,"If you just started, Then click yes or else the game will break")
 If savefilequestionstart = vbYes Then
     Set objFSO = createobject("Scripting.FileSystemObject")
-    Set objClickFile = objFSO.CreateTextFile("./" & "\CLICKS.txt")
-    Set objRebirthFile = objFSO.CreateTextFile("./" & "\REBIRTHS.txt")
+    Set objClickFile = objFSO.CreateTextFile("./" & "\Data\CLICKS.data")
+    Set objRebirthFile = objFSO.CreateTextFile("./" & "\Data\REBIRTHS.data")
     objClickFile.Write "0" & vbCrLf
     objClickFile.Close
     objRebirthFile.Write "1" & vbCrLf
@@ -53,12 +53,12 @@ end function
 virus = MsgBox("NOTE: THIS IS NOT A VIRUS! DON'T SPREAD ANY RUMORS BECAUSE OF THE BAD CODING LANGUAGE.", vbYesNo + vbExclamation, "IMPORTANT MESSAGE #1")
 Select Case virus
     Case 6
-        result = MsgBox("Clicking yes activates CLICK CLICK GAME!",vbYesNo + vbQuestion, "MPORTANT MESSAGE #2")
+        result = MsgBox("Clicking yes activates CLICK CLICK GAME!",vbYesNo + vbQuestion, "IMPORTANT MESSAGE #2")
     case 7
-        WScript.Echo "ok then :)"
+        WScript.Quit
 End Select
-i = CLng(LoadStringFromFile("./CLICKS.txt"))
-n = CLng(LoadStringFromFile("./REBIRTHS.txt"))
+i = CLng(LoadStringFromFile("\Data\CLICKS.data"))
+n = CLng(LoadStringFromFile("\Data\REBIRTHS.data"))
 hundredclick = False
 fivehundredclick = False
 thousandclick = False
@@ -99,24 +99,24 @@ Select Case result
         End If
         If hmmmm = vbAbort Then
             Dim menu
-            menu = MsgBox("P A U S E D! What would you like to do? Abort = Exit, Retry = More Options, and Ignore = Unpause!",vbAbortRetryIgnore+vbQuestion,"PAUSED")
+            menu = MsgBox("PAUSED! What would you like to do? Abort = Exit, Retry = More Options, and Ignore = Unpause!",vbAbortRetryIgnore+vbQuestion,"PAUSED")
             If menu = vbAbort Then
                 Call SaveGame(i,n)
                 WScript.Quit
             End If
             If menu = vbRetry Then
-                secondmenu = MsgBox("STILL P A U S E D! What would you like to do? Abort = Achievements, Retry = Suggest a feature, and Ignore = Update Game!",vbAbortRetryIgnore+vbQuestion,"PAUSED AGAIN")
+                secondmenu = MsgBox("STILL PAUSED! What would you like to do? Abort = Achievements, Retry = Suggest a feature, and Ignore = Update Game!",vbAbortRetryIgnore+vbQuestion,"PAUSED AGAIN")
                 If secondmenu = vbAbort Then
                     achievement = MsgBox("100 Clicks = " & hundredclick & ". 500 Clicks = " & fivehundredclick & ". 1000 Clicks = " & thousandclick & ". 10000 Clicks = " & tenthousandclick & ". Game Beaten = " & beatgame & ".", vbOKOnly+vbQuestion,"ACHIEVEMENTS")
                 End If
                 If secondmenu = vbRetry Then
-                    WshShell.Run "https://forms.gle/RP94pWah9TQd88gw8"
+                    WshShell.Run "https://form.jotform.com/221841684662057"
                 End If
                 If secondmenu = vbIgnore Then
                     If (ping("4.2.2.2")) Then
-                        upfunc = MsgBox("Update and Save?",vbYesNo+vbQuestion,"update lol")
+                        upfunc = MsgBox("Update and Save?",vbYesNo+vbQuestion,"Updating the game")
                         If upfunc = vbYes Then
-                            xHttp.Open "GET", "https://github.com/CLICKCLICKGAME/UPDATE/releases/download/test/clickclickgame.vbs", False
+                            xHttp.Open "GET", "https://github.com/xxgalaxyexplosionxx/Clicky-Click-Game/blob/main/game.vbs", False
                             xHttp.Send
 
                             With bStrm
@@ -127,7 +127,7 @@ Select Case result
                             End With
                             Call SaveGame(i,n)
                             WScript.Echo "Click OK to restart Click Click Game!"
-                            oShell.Run("wscript ./clickclickgame.vbs")
+                            oShell.Run("wscript ./game.vbs")
                             WScript.Quit
                         End If
                     Else
@@ -138,11 +138,11 @@ Select Case result
         End If
         Loop
     Case 7
-        x = MsgBox("Alright, come again!",vbYesNo + vbQuestion, "have a good day sir")
+        x = MsgBox("Alright, come again!",vbYesNo + vbQuestion, "Goodbye!")
         Select Case x
             Case 6
                 WScript.Quit
             Case 7
-                WScript.Echo "Oh.. ok then :("
+                WScript.Quit
         End Select
 End Select
