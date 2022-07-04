@@ -51,12 +51,12 @@ function ping (strComputer)
         end if
     loop
 end function
-virus = MsgBox("NOTE: THIS IS NOT A VIRUS! DON'T SPREAD ANY RUMORS BECAUSE OF THE BAD CODING LANGUAGE, DO YOU UNDERSTAND? (srry caps)", vbYesNo + vbExclamation, "ok this is serious")
+virus = MsgBox("NOTE: THIS IS NOT A VIRUS! DON'T SPREAD ANY RUMORS BECAUSE OF THE BAD CODING LANGUAGE.", vbYesNo + vbExclamation, "IMPORTANT MESSAGE #1")
 Select Case virus
     Case 6
-        result = MsgBox("Clicking yes activates CLICK CLICK GAME! Clicking no exits CLICK CLICK GAME! DATA SAVES WHEN YOU CLOSE NOW!",vbYesNo + vbQuestion, "just asking")
+        result = MsgBox("Clicking yes activates CLICK CLICK GAME!",vbYesNo + vbQuestion, "CLICK CLICK GAME")
     case 7
-        WScript.Echo "ok then :)"
+        WScript.Quit
 End Select
 i = CLng(LoadStringFromFile("./CLICKS.data"))
 n = CLng(LoadStringFromFile("./REBIRTHS.data"))
@@ -81,7 +81,7 @@ Select Case result
         If i => 10000 And tenthousandclick = False Then
             tenthousandclick = True
             beatgame = True
-            WScript.Echo "You may have beaten click click game.. or did you? BEAT GAME ACHIEVEMENT UNLOCKED!"
+            WScript.Echo "You may have beaten click click game.. Or did you? BEAT GAME ACHIEVEMENT UNLOCKED!"
         End If
         If i => 2147483647 Or n => 2147483647 Then
             WScript.Echo "You have found the true ending to CLICK CLICK GAME. Your game will restart and your progress will not be saved due to issues with CLng and how the limit for integers with CLng is 2147483647."
@@ -92,7 +92,7 @@ Select Case result
                     n = n + 1
                     i = i - i
             Else
-                egg = MsgBox("You need " & 500 - i & " more clicks to rebirth", vbQuestion, "Paused")
+                egg = MsgBox("You need " & 500 - i & " more clicks to rebirth.", vbQuestion, "Paused")
             End If
         End If
         If hmmmm = vbIgnore Then
