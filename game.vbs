@@ -3,6 +3,7 @@ Set oShell = WScript.CreateObject("WScript.Shell")
 dim xHttp: Set xHttp = createobject("MSXML2.ServerXMLHTTP")
 dim bStrm: Set bStrm = createobject("Adodb.Stream")
 Const fsoForReading = 1
+WScript.Echo "Click Click Game v0.0.1"
 Function LoadStringFromFile(filename)
     Dim fso, f
     Set fso = CreateObject("Scripting.FileSystemObject")
@@ -20,18 +21,18 @@ Function FileExists(FilePath)
 End Function
 Sub SaveGame(i,n)
     Set objFSO = createobject("Scripting.FileSystemObject")
-    Set objClickFile = objFSO.CreateTextFile("./" & "\Data\CLICKS.data")
-    Set objRebirthFile = objFSO.CreateTextFile("./" & "\Data\REBIRTHS.data")
+    Set objClickFile = objFSO.CreateTextFile("./" & "\CLICKS.data")
+    Set objRebirthFile = objFSO.CreateTextFile("./" & "\REBIRTHS.data")
     objClickFile.Write ""&i&"" & vbCrLf
     objClickFile.Close
     objRebirthFile.Write ""&n&"" & vbCrLf
     objRebirthFile.Close
 End Sub
-savefilequestionstart = MsgBox("New Game?", vbYesNo+vbQuestion,"If you just started, Then click yes or else the game will break")
+savefilequestionstart = MsgBox("Do you want to create new save files?", vbYesNo+vbQuestion,"if you just started, then click yes or else the game will break")
 If savefilequestionstart = vbYes Then
     Set objFSO = createobject("Scripting.FileSystemObject")
-    Set objClickFile = objFSO.CreateTextFile("./" & "\Data\CLICKS.data")
-    Set objRebirthFile = objFSO.CreateTextFile("./" & "\Data\REBIRTHS.data")
+    Set objClickFile = objFSO.CreateTextFile("./" & "\CLICKS.data")
+    Set objRebirthFile = objFSO.CreateTextFile("./" & "\REBIRTHS.data")
     objClickFile.Write "0" & vbCrLf
     objClickFile.Close
     objRebirthFile.Write "1" & vbCrLf
@@ -50,15 +51,15 @@ function ping (strComputer)
         end if
     loop
 end function
-virus = MsgBox("NOTE: THIS IS NOT A VIRUS! DON'T SPREAD ANY RUMORS BECAUSE OF THE BAD CODING LANGUAGE.", vbYesNo + vbExclamation, "IMPORTANT MESSAGE #1")
+virus = MsgBox("NOTE: THIS IS NOT A VIRUS! DON'T SPREAD ANY RUMORS BECAUSE OF THE BAD CODING LANGUAGE, DO YOU UNDERSTAND? (srry caps)", vbYesNo + vbExclamation, "ok this is serious")
 Select Case virus
     Case 6
-        result = MsgBox("Clicking yes activates CLICK CLICK GAME!",vbYesNo + vbQuestion, "IMPORTANT MESSAGE #2")
+        result = MsgBox("Clicking yes activates CLICK CLICK GAME! Clicking no exits CLICK CLICK GAME! DATA SAVES WHEN YOU CLOSE NOW!",vbYesNo + vbQuestion, "just asking")
     case 7
-        WScript.Quit
+        WScript.Echo "ok then :)"
 End Select
-i = CLng(LoadStringFromFile("\Data\CLICKS.data"))
-n = CLng(LoadStringFromFile("\Data\REBIRTHS.data"))
+i = CLng(LoadStringFromFile("./CLICKS.data"))
+n = CLng(LoadStringFromFile("./REBIRTHS.data"))
 hundredclick = False
 fivehundredclick = False
 thousandclick = False
@@ -91,7 +92,7 @@ Select Case result
                     n = n + 1
                     i = i - i
             Else
-                egg = MsgBox("You need " & 500 - i & " more clicks to rebirth.", vbQuestion, "Pause")
+                egg = MsgBox("You need " & 500 - i & " more clicks to rebirth", vbQuestion, "Paused")
             End If
         End If
         If hmmmm = vbIgnore Then
@@ -114,7 +115,7 @@ Select Case result
                 End If
                 If secondmenu = vbIgnore Then
                     If (ping("4.2.2.2")) Then
-                        upfunc = MsgBox("Update and Save?",vbYesNo+vbQuestion,"Updating the game")
+                        upfunc = MsgBox("Update and Save?",vbYesNo+vbQuestion,"UPDATE")
                         If upfunc = vbYes Then
                             xHttp.Open "GET", "https://github.com/xxgalaxyexplosionxx/Clicky-Click-Game/blob/main/game.vbs", False
                             xHttp.Send
@@ -123,7 +124,7 @@ Select Case result
                                 .type = 1 '//binary
                                 .open
                                 .write xHttp.responseBody
-                                .SaveToFile "./clickclickgame.vbs", 2 '//overwrite
+                                .SaveToFile "./game.vbs", 2 '//overwrite
                             End With
                             Call SaveGame(i,n)
                             WScript.Echo "Click OK to restart Click Click Game!"
@@ -138,7 +139,7 @@ Select Case result
         End If
         Loop
     Case 7
-        x = MsgBox("Alright, come again!",vbYesNo + vbQuestion, "Goodbye!")
+        x = MsgBox("Alright, come again!",vbYesNo + vbQuestion, "Have a good day sir!")
         Select Case x
             Case 6
                 WScript.Quit
